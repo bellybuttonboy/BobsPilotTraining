@@ -12,16 +12,21 @@ import dk.andreas.soeren.gameengine.Screen;
 public class MainMenuScreen extends Screen
 {
     Bitmap background = null;
+    Bitmap startgame = null;
+
     public MainMenuScreen(GameEngine gameEngine)
     {
         super(gameEngine);
         background = gameEngine.loadBitMap("bobspilottrainingassets/joyofmspaint.png");
+        startgame = gameEngine.loadBitMap("carscrollerassets/xstartgame.png");
     }
 
     @Override
     public void update(float deltaTime)
     {
         gameEngine.drawBitmap(background, 0, 0);
+        gameEngine.drawBitmap(startgame, 320/3 - startgame.getWidth() /2,
+                480/2 - startgame.getWidth()/2);
     }
 
     @Override
