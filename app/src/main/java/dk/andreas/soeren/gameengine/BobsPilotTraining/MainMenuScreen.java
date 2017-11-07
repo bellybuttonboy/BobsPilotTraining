@@ -25,8 +25,8 @@ public class MainMenuScreen extends Screen
     public void update(float deltaTime)
     {
         gameEngine.drawBitmap(background, 0, 0);
-        gameEngine.drawBitmap(startgame, 320/3 - startgame.getWidth() /2,
-                480/2 - startgame.getWidth()/2);
+        gameEngine.drawBitmap(startgame, 320/2 - startgame.getWidth()/2,
+                480/3 - startgame.getWidth()/2);
     }
 
     @Override
