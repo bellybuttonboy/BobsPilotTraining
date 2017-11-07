@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 
 import dk.andreas.soeren.gameengine.GameEngine;
 import dk.andreas.soeren.gameengine.Screen;
+import dk.andreas.soeren.gameengine.TouchEvent;
 
 /**
  * Created by Andreas on 07-Nov-17.
@@ -26,7 +27,12 @@ public class MainMenuScreen extends Screen
     {
         gameEngine.drawBitmap(background, 0, 0);
         gameEngine.drawBitmap(startgame, 320/2 - startgame.getWidth()/2,
-                480/3 - startgame.getWidth()/2);
+                480/2 - startgame.getWidth()/2);
+
+        if (gameEngine.isTouchDown(0))
+        {
+            new GameScreen(gameEngine);
+        }
     }
 
     @Override
