@@ -191,25 +191,30 @@ public class World
 
     }
 
-    public void updateRecords(int time)
+    public boolean updateRecords(int time)
     {
+        boolean updated = false;
         if (time >= Integer.parseInt(records[0]))
         {
             sharedPreferences.edit().putString("first","" + time).apply();
             sharedPreferences.edit().putString("second", records[0]).apply();
             sharedPreferences.edit().putString("third", records[1]).apply();
+            updated = true;
         }
         else if (time >= Integer.parseInt(records[1]))
         {
             sharedPreferences.edit().putString("second", "" + time).apply();
             sharedPreferences.edit().putString("third", records[1]).apply();
+            updated = true;
         }
         else if (time >= Integer.parseInt(records[2]))
         {
             sharedPreferences.edit().putString("third","" + time).apply();
+            updated = true;
         }
 
         recordsUpdated = true;
+        return updated;
     }
 }
 
