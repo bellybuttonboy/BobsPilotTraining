@@ -25,8 +25,17 @@ public class HighscoreScreen extends Screen
     public void update(float deltaTime)
     {
         gameEngine.drawBitmap(background, 0, 0);
-        gameEngine.drawBitmap(returnToMainMenuButton, 10, 320);
+        gameEngine.drawBitmap(returnToMainMenuButton, 10, 310);
 
+        if (gameEngine.isTouchDown(0))
+        {
+            if (gameEngine.getTouchX(0) > 10 && gameEngine.getTouchX(0) < 310 &&
+                    gameEngine.getTouchY(0) > 310 && gameEngine.getTouchY(0) < 360)
+            {
+                gameEngine.setScreen(new MainMenuScreen(gameEngine, false));
+                return;
+            }
+        }
 
 
 
