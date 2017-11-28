@@ -31,6 +31,7 @@ public class WorldRenderer
     Typeface font = null;
     int lastTime = 0;
     int colorTracker = 0;
+    boolean newRecord;
 
     public WorldRenderer(GameEngine gameEngine, World world)
     {
@@ -91,11 +92,14 @@ public class WorldRenderer
             {
                 if(world.updateRecords((int) world.passedTime))
                 {
-                    gameEngine.drawText(font,"NEW RECORD!", 55, 300, Color.RED, 40);
+                    newRecord = true;
                 }
                 world.loadRecords(gameEngine);
             }
-
+            if (newRecord)
+            {
+                gameEngine.drawText(font,"NEW RECORD!", 55, 300, Color.RED, 40);
+            }
         }
 
     }
