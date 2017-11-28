@@ -15,13 +15,17 @@ import dk.andreas.soeren.gameengine.TouchEvent;
 public class MainMenuScreen extends Screen
 {
     Bitmap background = null;
-    Bitmap startgame = null;
+    Bitmap startgameButton = null;
+    Bitmap recordButton = null;
+    String assetsFolder = "bobspilottrainingassets/";
     boolean touchReleased = false;
 
     public MainMenuScreen(GameEngine gameEngine, boolean touchReleased)
     {
         super(gameEngine);
-        background = gameEngine.loadBitMap("bobspilottrainingassets/StartScreen.png");
+        background = gameEngine.loadBitMap( assetsFolder + "StartScreen.png");
+        startgameButton = gameEngine.loadBitMap(assetsFolder + "playButton");
+        recordButton = gameEngine.loadBitMap(assetsFolder + "recordButton");
         this.touchReleased = touchReleased;
     }
 
@@ -33,6 +37,7 @@ public class MainMenuScreen extends Screen
         List<TouchEvent> events = gameEngine.getTouchEvents();
 
         int eventsSize = events.size();
+
         if(!touchReleased)
         {
             for (int i = 0; i < eventsSize; i++)
