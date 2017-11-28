@@ -20,6 +20,7 @@ public class MainMenuScreen extends Screen
     String assetsFolder = "bobspilottrainingassets/";
     boolean touchReleased = false;
 
+
     public MainMenuScreen(GameEngine gameEngine, boolean touchReleased)
     {
         super(gameEngine);
