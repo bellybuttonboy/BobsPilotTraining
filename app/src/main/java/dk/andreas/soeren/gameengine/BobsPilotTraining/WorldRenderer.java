@@ -72,19 +72,19 @@ public class WorldRenderer
 
         if (world.gameOver)
         {
-            gameEngine.drawText(font,"GAMEOVER!!!", 90, 100, Color.RED, 28);
+            gameEngine.drawText(font,"GAMEOVER!!!", 78, 150, Color.RED, 40);
 
             if (world.passedTime < 10) // Check on how far to the left we have to render it depending on length of your time
             {
-                gameEngine.drawText(font,"Your time: " + (int)world.passedTime, 97, 135, Color.RED, 28);
+                gameEngine.drawText(font,"Your time: " + (int)world.passedTime, 85, 135, Color.RED, 40);
             }
             else if (world.passedTime > 10 && world.passedTime < 100)
             {
-                gameEngine.drawText(font,"Your time: " + (int)world.passedTime, 90, 135, Color.RED, 28);
+                gameEngine.drawText(font,"Your time: " + (int)world.passedTime, 77, 135, Color.RED, 40);
             }
             else if (world.passedTime > 100)
             {
-                gameEngine.drawText(font,"Your time: " + (int)world.passedTime, 83, 135, Color.RED, 28);
+                gameEngine.drawText(font,"Your time: " + (int)world.passedTime, 70, 135, Color.RED, 40);
             }
 
             if (!world.recordsUpdated) // Check to see if we have updated the record this playthrough
@@ -92,12 +92,6 @@ public class WorldRenderer
                 world.updateRecords((int) world.passedTime);
                 world.loadRecords(gameEngine);
             }
-
-            gameEngine.drawText(font,"Records:", 118, 250, Color.RED, 28);
-            gameEngine.drawText(font,"1. : " + world.records[0], 135, 290, Color.RED, 28);
-            gameEngine.drawText(font, "2. : " + world.records[1], 135, 330, Color.RED, 28);
-            gameEngine.drawText(font, "3. : " + world.records[2], 135, 370, Color.RED, 28);
-
 
         }
 
