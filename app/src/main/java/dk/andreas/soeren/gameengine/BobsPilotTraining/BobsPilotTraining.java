@@ -12,7 +12,8 @@ public class BobsPilotTraining extends GameEngine
     @Override
     public Screen createStartScreen()
     {
-        music = loadMusic("/bobspilottrainingassets/theme.wav");
+        music = loadMusic("bobspilottrainingassets/theme.wav");
+        music.setLooping(true);
         return new MainMenuScreen(this, true);
 
     }
