@@ -89,7 +89,10 @@ public class WorldRenderer
 
             if (!world.recordsUpdated) // Check to see if we have updated the record this playthrough
             {
-                world.updateRecords((int) world.passedTime);
+                if(world.updateRecords((int) world.passedTime))
+                {
+                    gameEngine.drawText(font,"NEW RECORD!", 55, 300, Color.RED, 40);
+                }
                 world.loadRecords(gameEngine);
             }
 
