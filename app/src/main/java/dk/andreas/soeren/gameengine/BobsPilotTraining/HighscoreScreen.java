@@ -11,7 +11,7 @@ import dk.andreas.soeren.gameengine.Screen;
 
 public class HighscoreScreen extends Screen
 {
-    String assetsFolder = "bobspilottraining/assets/";
+    String assetsFolder = "bobspilottrainingassets/";
     Bitmap background = null;
     Bitmap returnToMainMenuButton = null;
     public HighscoreScreen(GameEngine gameEngine)
