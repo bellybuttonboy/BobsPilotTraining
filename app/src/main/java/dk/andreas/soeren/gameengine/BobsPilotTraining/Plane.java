@@ -6,8 +6,8 @@ package dk.andreas.soeren.gameengine.BobsPilotTraining;
 
 public class Plane
 {
-    public static int WIDTH = 35;
-    public static int HEIGHT = 35;
+    public static int WIDTH = 45;
+    public static int HEIGHT = 45;
 
     public int x;
     public int y;

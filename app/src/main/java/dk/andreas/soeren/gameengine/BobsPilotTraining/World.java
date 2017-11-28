@@ -1,5 +1,7 @@
 package dk.andreas.soeren.gameengine.BobsPilotTraining;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -21,31 +23,58 @@ public class World
     List<Enemy> enemyList = new ArrayList<>();
     Enemy SquareEnemy;
     Enemy TriangleEnemy;
+    Enemy CircleEnemy;
+    String[] records = new String[3];
+    SharedPreferences sharedPreferences;
+    boolean recordsUpdated = false;
+    float passedTime = 0;
+
 
     public World(GameEngine gameEngine)
     {
         this.gameEngine = gameEngine;
         plane = new Plane();
         setUpEnemies();
+        loadRecords(gameEngine);
     }
 
 
     public void update(float deltatime)
     {
+
+        if(!gameOver)
+        {
+            passedTime = passedTime + deltatime;
+        }
         SquareEnemy.x = (int) (SquareEnemy.x + SquareEnemy.vx * deltatime);
         SquareEnemy.y = (int) (SquareEnemy.y + SquareEnemy.vy * deltatime);
 
         TriangleEnemy.x = (int) (TriangleEnemy.x + TriangleEnemy.vx * deltatime);
         TriangleEnemy.y = (int) (TriangleEnemy.y + TriangleEnemy.vy * deltatime);
 
+        if (CircleEnemy != null)
+        {
+            CircleEnemy.x = (int) (CircleEnemy.x + CircleEnemy.vx * deltatime);
+            CircleEnemy.y = (int) (CircleEnemy.y + CircleEnemy.vy * deltatime);
+        }
+
+        if(passedTime > 30)
+        {
+            if(CircleEnemy == null)
+            {
+                CircleEnemy = new Enemy(40,40,(int)MIN_X, (int)MIN_Y);
+                enemyList.add(CircleEnemy);
+            }
+        }
 
         updatePlane();
-        checkBoundariesEnemy(SquareEnemy);
-        checkBoundariesEnemy(TriangleEnemy);
+        int enemyListSize = enemyList.size();
+        for (int i = 0; i < enemyListSize; i++)
+        {
+            checkBoundariesEnemy(enemyList.get(i));
+        }
 
         checkForCollisions();
-
-
     }
 
     public void checkForCollisions()
@@ -68,6 +97,7 @@ public class World
         SquareEnemy = new Enemy(40, 40, 319 - 40, 0);
         TriangleEnemy = new Enemy(29, 24, 0, 479 - 24);
 
+
         enemyList.add(SquareEnemy);
         enemyList.add(TriangleEnemy);
     }
@@ -76,11 +106,11 @@ public class World
     {
         if (gameEngine.isTouchDown(0)) // move plane
         {
-            if (gameEngine.getTouchX(0) - plane.x > -25 && gameEngine.getTouchX(0) - plane.x < 0 ||
-                    gameEngine.getTouchX(0) - plane.x < 60 && gameEngine.getTouchX(0) - plane.x > 0) // husk at ændre når breden ændres
+            if (gameEngine.getTouchX(0) - plane.x > -35 && gameEngine.getTouchX(0) - plane.x < 0 ||
+                    gameEngine.getTouchX(0) - plane.x < 80 && gameEngine.getTouchX(0) - plane.x > 0) // husk at ændre når breden ændres
             {
-                if (gameEngine.getTouchY(0) - plane.y > -25 && gameEngine.getTouchY(0) - plane.y < 0 ||
-                        gameEngine.getTouchY(0) - plane.y < 25 && gameEngine.getTouchY(0) - plane.y > 0 )
+                if (gameEngine.getTouchY(0) - plane.y > -35 && gameEngine.getTouchY(0) - plane.y < 0 ||
+                        gameEngine.getTouchY(0) - plane.y < 80 && gameEngine.getTouchY(0) - plane.y > 0 )
                 {
                     plane.previousX = plane.x;
                     plane.previousY = plane.y;
@@ -90,6 +120,28 @@ public class World
                 }
             }
         }
+
+        //check if it's out of the scree
+        if (plane.x + plane.WIDTH > MAX_X)
+        {
+            plane.x = (int) MAX_X - plane.WIDTH;
+        }
+
+        if (plane.x < MIN_X)
+        {
+            plane.x = (int) MIN_X;
+        }
+
+        if(plane.y + plane.HEIGHT > MAX_Y)
+        {
+            plane.y = (int) MAX_Y - plane.HEIGHT;
+        }
+
+        if(plane.y < MIN_Y)
+        {
+            plane.y = (int) MIN_Y;
+        }
+
     }
 
     public void checkBoundariesEnemy(Enemy enemy)
@@ -128,6 +180,36 @@ public class World
             return true;
         }
         return false;
+    }
+
+    public void loadRecords(Context context)
+    {
+        sharedPreferences = context.getSharedPreferences("DATA", Context.MODE_PRIVATE);
+        records[0] = sharedPreferences.getString("first", "0");
+        records[1] = sharedPreferences.getString("second", "0");
+        records[2] = sharedPreferences.getString("third","0");
+
+    }
+
+    public void updateRecords(int time)
+    {
+        if (time >= Integer.parseInt(records[0]))
+        {
+            sharedPreferences.edit().putString("first","" + time).apply();
+            sharedPreferences.edit().putString("second", records[0]).apply();
+            sharedPreferences.edit().putString("third", records[1]).apply();
+        }
+        else if (time >= Integer.parseInt(records[1]))
+        {
+            sharedPreferences.edit().putString("second", "" + time).apply();
+            sharedPreferences.edit().putString("third", records[1]).apply();
+        }
+        else if (time >= Integer.parseInt(records[2]))
+        {
+            sharedPreferences.edit().putString("third","" + time).apply();
+        }
+
+        recordsUpdated = true;
     }
 }
 

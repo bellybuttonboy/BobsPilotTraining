@@ -2,6 +2,8 @@ package dk.andreas.soeren.gameengine.BobsPilotTraining;
 
 import android.graphics.Bitmap;
 
+import java.util.List;
+
 import dk.andreas.soeren.gameengine.GameEngine;
 import dk.andreas.soeren.gameengine.Screen;
 import dk.andreas.soeren.gameengine.TouchEvent;
@@ -14,25 +16,40 @@ public class MainMenuScreen extends Screen
 {
     Bitmap background = null;
     Bitmap startgame = null;
+    boolean touchReleased = false;
 
-    public MainMenuScreen(GameEngine gameEngine)
+    public MainMenuScreen(GameEngine gameEngine, boolean touchReleased)
     {
         super(gameEngine);
-        background = gameEngine.loadBitMap("bobspilottrainingassets/joyofmspaint.png");
-        startgame = gameEngine.loadBitMap("carscrollerassets/xstartgame.png");
+        background = gameEngine.loadBitMap("bobspilottrainingassets/StartScreen.png");
+        this.touchReleased = touchReleased;
     }
 
     @Override
     public void update(float deltaTime)
     {
         gameEngine.drawBitmap(background, 0, 0);
-        gameEngine.drawBitmap(startgame, 320/2 - startgame.getWidth()/2,
-                480/2 - startgame.getWidth()/2);
 
-        if (gameEngine.isTouchDown(0))
+        List<TouchEvent> events = gameEngine.getTouchEvents();
+
+        int eventsSize = events.size();
+        if(!touchReleased)
         {
-            gameEngine.setScreen(new GameScreen(gameEngine));
-            return;
+            for (int i = 0; i < eventsSize; i++)
+            {
+                if (events.get(i).type == TouchEvent.TouchEventType.Up)
+                {
+                    touchReleased = true;
+                }
+            }
+        }
+        else
+        {
+            if (gameEngine.isTouchDown(0))
+            {
+                gameEngine.setScreen(new GameScreen(gameEngine));
+                return;
+            }
         }
     }
 
