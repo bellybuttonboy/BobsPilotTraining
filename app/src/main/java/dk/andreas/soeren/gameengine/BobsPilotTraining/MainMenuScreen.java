@@ -54,8 +54,12 @@ public class MainMenuScreen extends Screen
         {
             if (gameEngine.isTouchDown(0))
             {
-                gameEngine.setScreen(new GameScreen(gameEngine));
-                return;
+                if (gameEngine.getTouchX(0) > 10 && gameEngine.getTouchY(0) < 310 &&
+                        gameEngine.getTouchY(0) > 330 && gameEngine.getTouchY(0) < 380)
+                {
+                    gameEngine.setScreen(new GameScreen(gameEngine));
+                    return;
+                }
             }
         }
     }
