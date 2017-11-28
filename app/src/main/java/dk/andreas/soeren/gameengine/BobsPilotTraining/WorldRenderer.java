@@ -76,15 +76,15 @@ public class WorldRenderer
 
             if (world.passedTime < 10) // Check on how far to the left we have to render it depending on length of your time
             {
-                gameEngine.drawText(font,"Your time: " + (int)world.passedTime, 85, 135, Color.RED, 40);
+                gameEngine.drawText(font,"Your time: " + (int)world.passedTime, 85, 200, Color.RED, 40);
             }
             else if (world.passedTime > 10 && world.passedTime < 100)
             {
-                gameEngine.drawText(font,"Your time: " + (int)world.passedTime, 77, 135, Color.RED, 40);
+                gameEngine.drawText(font,"Your time: " + (int)world.passedTime, 77, 200, Color.RED, 40);
             }
             else if (world.passedTime > 100)
             {
-                gameEngine.drawText(font,"Your time: " + (int)world.passedTime, 70, 135, Color.RED, 40);
+                gameEngine.drawText(font,"Your time: " + (int)world.passedTime, 70, 200, Color.RED, 40);
             }
 
             if (!world.recordsUpdated) // Check to see if we have updated the record this playthrough
