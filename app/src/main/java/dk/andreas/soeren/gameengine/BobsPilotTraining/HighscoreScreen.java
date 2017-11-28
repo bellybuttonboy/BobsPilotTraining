@@ -37,9 +37,9 @@ public class HighscoreScreen extends Screen
         gameEngine.drawBitmap(background, 0, 0);
         gameEngine.drawBitmap(returnToMainMenuButton, 10, 310);
 
-        gameEngine.drawText(font,"1. : " + highscoresArray[0], 50, 290, Color.RED, 36);
-        gameEngine.drawText(font, "2. : " + highscoresArray[1], 50, 330, Color.RED, 36);
-        gameEngine.drawText(font, "3. : " + highscoresArray[2], 50, 370, Color.RED, 36);
+        gameEngine.drawText(font,"1. : " + highscoresArray[0], 100, 190, Color.RED, 36);
+        gameEngine.drawText(font, "2. : " + highscoresArray[1], 100, 240, Color.RED, 36);
+        gameEngine.drawText(font, "3. : " + highscoresArray[2], 100, 290, Color.RED, 36);
 
 
 
