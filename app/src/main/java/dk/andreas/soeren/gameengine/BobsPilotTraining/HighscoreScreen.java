@@ -1,6 +1,8 @@
 package dk.andreas.soeren.gameengine.BobsPilotTraining;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.Typeface;
 
 import dk.andreas.soeren.gameengine.GameEngine;
 import dk.andreas.soeren.gameengine.Screen;
@@ -14,11 +16,19 @@ public class HighscoreScreen extends Screen
     String assetsFolder = "bobspilottrainingassets/";
     Bitmap background = null;
     Bitmap returnToMainMenuButton = null;
+    Highscores highscores;
+    String[] highscoresArray;
+    Typeface font = null;
+
     public HighscoreScreen(GameEngine gameEngine)
     {
         super(gameEngine);
         background = gameEngine.loadBitMap(assetsFolder + "HighscoreScreen.png");
         returnToMainMenuButton = gameEngine.loadBitMap(assetsFolder + "returnToMainMenuButton.png");
+        font = gameEngine.loadFont(assetsFolder + "Chewy-Regular.ttf");
+        highscores = new Highscores();
+        highscores.loadRecords(gameEngine);
+        highscoresArray = highscores.highscores;
     }
 
     @Override
@@ -26,6 +36,12 @@ public class HighscoreScreen extends Screen
     {
         gameEngine.drawBitmap(background, 0, 0);
         gameEngine.drawBitmap(returnToMainMenuButton, 10, 310);
+
+        gameEngine.drawText(font,"1. : " + highscoresArray[0], 50, 290, Color.RED, 36);
+        gameEngine.drawText(font, "2. : " + highscoresArray[1], 50, 330, Color.RED, 36);
+        gameEngine.drawText(font, "3. : " + highscoresArray[2], 50, 370, Color.RED, 36);
+
+
 
         if (gameEngine.isTouchDown(0))
         {
@@ -36,10 +52,6 @@ public class HighscoreScreen extends Screen
                 return;
             }
         }
-
-
-
-
     }
 
     @Override
