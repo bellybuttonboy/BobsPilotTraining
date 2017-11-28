@@ -25,7 +25,9 @@ public class HighscoreScreen extends Screen
     public void update(float deltaTime)
     {
         gameEngine.drawBitmap(background, 0, 0);
-        gameEngine.drawBitmap(returnToMainMenuButton, 10, 250);
+        gameEngine.drawBitmap(returnToMainMenuButton, 10, 320);
+
+
 
 
 
