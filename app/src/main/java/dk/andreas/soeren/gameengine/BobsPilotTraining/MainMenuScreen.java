@@ -24,8 +24,8 @@ public class MainMenuScreen extends Screen
     {
         super(gameEngine);
         background = gameEngine.loadBitMap( assetsFolder + "StartScreen.png");
-        startgameButton = gameEngine.loadBitMap(assetsFolder + "playButton");
-        recordButton = gameEngine.loadBitMap(assetsFolder + "recordButton");
+        startgameButton = gameEngine.loadBitMap(assetsFolder + "playButton.png");
+        recordButton = gameEngine.loadBitMap(assetsFolder + "recordButton.png");
         this.touchReleased = touchReleased;
     }
 
@@ -33,6 +33,8 @@ public class MainMenuScreen extends Screen
     public void update(float deltaTime)
     {
         gameEngine.drawBitmap(background, 0, 0);
+        gameEngine.drawBitmap(startgameButton, 10, 330);
+        gameEngine.drawBitmap(recordButton, 10, 390);
 
         List<TouchEvent> events = gameEngine.getTouchEvents();
 
