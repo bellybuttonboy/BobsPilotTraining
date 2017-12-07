@@ -111,7 +111,8 @@ public class World
         {
             enemy = enemyList.get(i);
 
-            if (collideRectangles(enemy.x, enemy.y, enemy.WIDTH, enemy.HEIGHT, plane.x, plane.y, plane.WIDTH, plane.HEIGHT))
+            if (collideRectangles(enemy.x, enemy.y, enemy.WIDTH, enemy.HEIGHT, plane.x, plane.y,
+                    plane.WIDTH, plane.HEIGHT) && gameOver != true)
             {
                 gameOver = true;
                 collisionListener.gameover();
@@ -143,8 +144,8 @@ public class World
                     plane.previousX = plane.x;
                     plane.previousY = plane.y;
 
-                    plane.x = gameEngine.getTouchX(0);
-                    plane.y = gameEngine.getTouchY(0);
+                    plane.x = gameEngine.getTouchX(0) - plane.WIDTH/2;
+                    plane.y = gameEngine.getTouchY(0) - plane.HEIGHT/2;
                 }
             }
         }
@@ -178,22 +179,26 @@ public class World
         {
             enemy.x = (int) MIN_X;
             enemy.vx = -enemy.vx;
+            collisionListener.collisionWall();
         }
         if (enemy.x + enemy.WIDTH > MAX_X)
         {
             enemy.x = (int) (MAX_X - enemy.WIDTH);
             enemy.vx = -enemy.vx;
+            collisionListener.collisionWall();
         }
 
         if (enemy.y < MIN_Y)
         {
             enemy.y = (int) MIN_Y;
             enemy.vy = -enemy.vy;
+            collisionListener.collisionWall();
         }
         if (enemy.y + enemy.HEIGHT > MAX_Y)
         {
             enemy.y = (int) (MAX_Y - enemy.HEIGHT);
             enemy.vy = -enemy.vy;
+            collisionListener.collisionWall();
         }
     }
 

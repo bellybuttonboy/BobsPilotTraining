@@ -7,6 +7,5 @@ package dk.andreas.soeren.gameengine.BobsPilotTraining;
 public interface CollisionListener
 {
     public void collisionWall();
-    public void recordSound();
     public void gameover();
 }

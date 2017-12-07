@@ -26,14 +26,8 @@ public class GameScreen extends Screen
         {
             public void collisionWall()
             {
-                enemyBounceSound.play(1);
+                enemyBounceSound.play((float) 0.5);
             }
-            @Override
-            public void recordSound()
-            {
-                recordSound.play(1);
-            }
-
             @Override
             public void gameover()
             {
@@ -43,6 +37,7 @@ public class GameScreen extends Screen
         renderer = new WorldRenderer(gameEngine, world);
         gameOverSound = gameEngine.loadSound(assetsMap + "splash.wav");
         enemyBounceSound = gameEngine.loadSound(assetsMap + "bounce.wav");
+        recordSound = gameEngine.loadSound(assetsMap + "tada.wav");
     }
 
     @Override
@@ -77,11 +72,7 @@ public class GameScreen extends Screen
 
         }
 
-        if(world.gameOver != true)
-        {
-            world.update(deltaTime);
-        }
-
+        world.update(deltaTime);
         renderer.render(deltaTime);
     }
 

@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.util.Log;
 
 import dk.andreas.soeren.gameengine.GameEngine;
+import dk.andreas.soeren.gameengine.Sound;
 
 public class WorldRenderer
 {
@@ -26,6 +27,7 @@ public class WorldRenderer
     Bitmap enemySquare = null;
     Bitmap enemyTriangle = null;
     Bitmap enemyCircle = null;
+    Sound recordSound = null;
     String assetsMap = "bobspilottrainingassets/";
     Plane plane = null;
     Typeface font = null;
@@ -50,6 +52,7 @@ public class WorldRenderer
         enemyTriangle = gameEngine.loadBitMap(assetsMap + "EnemyTriangle.png");
         enemyCircle = gameEngine.loadBitMap(assetsMap + "EnemyCircle.png");
         font = gameEngine.loadFont(assetsMap + "Chewy-Regular.ttf");
+        recordSound = gameEngine.loadSound(assetsMap + "tada.wav");
         planeToDraw = planeRightImg;
         plane = world.plane;
         createColorArray();
@@ -93,6 +96,7 @@ public class WorldRenderer
                 if(world.updateRecords((int) world.passedTime))
                 {
                     newRecord = true;
+                    recordSound.play(1);
                 }
                 world.loadRecords(gameEngine);
             }
