@@ -1,9 +1,5 @@
 package dk.andreas.soeren.gameengine.BobsPilotTraining;
 
-import android.graphics.Color;
-import android.graphics.Typeface;
-import android.util.Log;
-
 import java.util.List;
 
 
@@ -19,6 +15,8 @@ public class GameScreen extends Screen
     boolean touchReleased = false;
     String assetsMap = "bobspilottrainingassets/";
     Sound gameOverSound;
+    Sound enemyBounceSound;
+    Sound recordSound;
 
 
     public GameScreen(GameEngine gameEngine)
@@ -28,18 +26,14 @@ public class GameScreen extends Screen
         {
             public void collisionWall()
             {
-                gameOverSound.play(1);
+                enemyBounceSound.play(1);
             }
             @Override
-            public void collisionPaddle()
+            public void recordSound()
             {
-                gameOverSound.play(1);
+                recordSound.play(1);
             }
-            @Override
-            public void collisionBlock()
-            {
-                gameOverSound.play(1);
-            }
+
             @Override
             public void gameover()
             {
@@ -47,7 +41,8 @@ public class GameScreen extends Screen
             }
         });
         renderer = new WorldRenderer(gameEngine, world);
-        gameOverSound = gameEngine.loadSound(assetsMap + "gameOverSound.wav");
+        gameOverSound = gameEngine.loadSound(assetsMap + "splash.wav");
+        enemyBounceSound = gameEngine.loadSound(assetsMap + "bounce.wav");
     }
 
     @Override
@@ -81,7 +76,12 @@ public class GameScreen extends Screen
 
 
         }
-        world.update(deltaTime);
+
+        if(world.gameOver != true)
+        {
+            world.update(deltaTime);
+        }
+
         renderer.render(deltaTime);
     }
 
