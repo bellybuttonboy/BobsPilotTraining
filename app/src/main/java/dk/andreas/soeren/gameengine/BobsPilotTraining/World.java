@@ -7,6 +7,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import dk.andreas.soeren.gameengine.Breakout.*;
 import dk.andreas.soeren.gameengine.GameEngine;
 
 
@@ -17,7 +18,7 @@ public class World
     public static final float MIN_Y = 0;
     public static final float MAX_Y = 479;
     GameEngine gameEngine;
-    //CollisionListener collisionListener;
+    CollisionListener collisionListener;
     boolean gameOver = false;
     public Plane plane = null;
     List<Enemy> enemyList = new ArrayList<>();
@@ -31,9 +32,10 @@ public class World
     float passedTime = 0;
 
 
-    public World(GameEngine gameEngine)
+    public World(GameEngine gameEngine, CollisionListener collisionListener)
     {
         this.gameEngine = gameEngine;
+        this.collisionListener = collisionListener;
         plane = new Plane();
         setUpEnemies();
         loadRecords(gameEngine);
@@ -112,7 +114,8 @@ public class World
             if (collideRectangles(enemy.x, enemy.y, enemy.WIDTH, enemy.HEIGHT, plane.x, plane.y, plane.WIDTH, plane.HEIGHT))
             {
                 gameOver = true;
-
+                collisionListener.gameover();
+                return;
             }
         }
     }

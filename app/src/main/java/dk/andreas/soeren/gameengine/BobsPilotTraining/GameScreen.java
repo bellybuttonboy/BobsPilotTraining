@@ -6,7 +6,7 @@ import android.util.Log;
 
 import java.util.List;
 
-import dk.andreas.soeren.gameengine.Breakout.*;
+
 import dk.andreas.soeren.gameengine.GameEngine;
 import dk.andreas.soeren.gameengine.Screen;
 import dk.andreas.soeren.gameengine.Sound;
@@ -24,10 +24,30 @@ public class GameScreen extends Screen
     public GameScreen(GameEngine gameEngine)
     {
         super(gameEngine);
-        world = new World(gameEngine);
+        world = new World(gameEngine, new CollisionListener()
+        {
+            public void collisionWall()
+            {
+                gameOverSound.play(1);
+            }
+            @Override
+            public void collisionPaddle()
+            {
+                gameOverSound.play(1);
+            }
+            @Override
+            public void collisionBlock()
+            {
+                gameOverSound.play(1);
+            }
+            @Override
+            public void gameover()
+            {
+                gameOverSound.play(1);
+            }
+        });
         renderer = new WorldRenderer(gameEngine, world);
         gameOverSound = gameEngine.loadSound(assetsMap + "gameOverSound.wav");
-
     }
 
     @Override
