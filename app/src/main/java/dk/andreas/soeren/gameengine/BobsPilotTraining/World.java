@@ -27,6 +27,7 @@ public class World
     String[] records = new String[3];
     SharedPreferences sharedPreferences;
     boolean recordsUpdated = false;
+    int speedUpCheck = 0;
     float passedTime = 0;
 
 
@@ -46,6 +47,9 @@ public class World
         {
             passedTime = passedTime + deltatime;
         }
+
+        speedIncrease();
+
         SquareEnemy.x = (int) (SquareEnemy.x + SquareEnemy.vx * deltatime);
         SquareEnemy.y = (int) (SquareEnemy.y + SquareEnemy.vy * deltatime);
 
@@ -77,6 +81,26 @@ public class World
         checkForCollisions();
     }
 
+    public void speedIncrease()
+    {
+        if(passedTime - speedUpCheck > 10)
+        {
+            SquareEnemy.vx = (int) (SquareEnemy.vx * 1.05);
+            SquareEnemy.vy = (int) (SquareEnemy.vy * 1.05);
+
+            TriangleEnemy.vx = (int) (TriangleEnemy.vx * 1.05);
+            TriangleEnemy.vy = (int) (TriangleEnemy.vy * 1.05);
+
+            if(CircleEnemy != null)
+            {
+                CircleEnemy.vx = (int) (CircleEnemy.vx * 1.05);
+                CircleEnemy.vy = (int) (CircleEnemy.vy * 1.05);
+            }
+
+            speedUpCheck = (int) passedTime;
+        }
+    }
+
     public void checkForCollisions()
     {
         int enemySize = enemyList.size();
@@ -88,6 +112,7 @@ public class World
             if (collideRectangles(enemy.x, enemy.y, enemy.WIDTH, enemy.HEIGHT, plane.x, plane.y, plane.WIDTH, plane.HEIGHT))
             {
                 gameOver = true;
+
             }
         }
     }

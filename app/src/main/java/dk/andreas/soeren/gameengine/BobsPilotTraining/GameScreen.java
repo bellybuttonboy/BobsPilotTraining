@@ -5,22 +5,28 @@ import android.graphics.Typeface;
 import android.util.Log;
 
 import java.util.List;
+
+import dk.andreas.soeren.gameengine.Breakout.*;
 import dk.andreas.soeren.gameengine.GameEngine;
 import dk.andreas.soeren.gameengine.Screen;
+import dk.andreas.soeren.gameengine.Sound;
 import dk.andreas.soeren.gameengine.TouchEvent;
 
 public class GameScreen extends Screen
 {
     WorldRenderer renderer = null;
     World world = null;
-    Typeface font = null;
     boolean touchReleased = false;
+    String assetsMap = "bobspilottrainingassets/";
+    Sound gameOverSound;
+
 
     public GameScreen(GameEngine gameEngine)
     {
         super(gameEngine);
         world = new World(gameEngine);
         renderer = new WorldRenderer(gameEngine, world);
+        gameOverSound = gameEngine.loadSound(assetsMap + "gameOverSound.wav");
 
     }
 
@@ -29,6 +35,7 @@ public class GameScreen extends Screen
     {
         if (world.gameOver)
         {
+
             List<TouchEvent> events = gameEngine.getTouchEvents();
             int eventsSize = events.size();
 

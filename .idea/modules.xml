@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BobsPilotTraining.iml" filepath="$PROJECT_DIR$/BobsPilotTraining.iml" />
       <module fileurl="file://$PROJECT_DIR$/GameEngine.iml" filepath="$PROJECT_DIR$/GameEngine.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ProjektEksamenAndroid.iml" filepath="$PROJECT_DIR$/ProjektEksamenAndroid.iml" />
       <module fileurl="file://$PROJECT_DIR$/androidGameEngine.iml" filepath="$PROJECT_DIR$/androidGameEngine.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
