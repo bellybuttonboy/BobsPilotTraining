@@ -47,7 +47,7 @@ public class GameScreen extends Screen
             }
         });
         renderer = new WorldRenderer(gameEngine, world);
-        gameOverSound = gameEngine.loadSound(assetsMap + "gameOverSound.wav");
+        gameOverSound = gameEngine.loadSound(assetsMap + "splash.wav");
     }
 
     @Override
