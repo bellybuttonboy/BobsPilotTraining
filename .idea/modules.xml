@@ -3,10 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BobsPilotTraining.iml" filepath="$PROJECT_DIR$/BobsPilotTraining.iml" />
-      <module fileurl="file://C:/Users/Andre/Desktop/AndroidProjekt/BobsPilotTraining/GameEngine.iml" filepath="C:/Users/Andre/Desktop/AndroidProjekt/BobsPilotTraining/GameEngine.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ProjektEksamenAndroid.iml" filepath="$PROJECT_DIR$/ProjektEksamenAndroid.iml" />
-      <module fileurl="file://C:/Users/Andre/Desktop/AndroidProjekt/BobsPilotTraining/ProjektEksamenAndroid.iml" filepath="C:/Users/Andre/Desktop/AndroidProjekt/BobsPilotTraining/ProjektEksamenAndroid.iml" />
-      <module fileurl="file://C:/Users/Andre/Desktop/AndroidProjekt/BobsPilotTraining/androidGameEngine.iml" filepath="C:/Users/Andre/Desktop/AndroidProjekt/BobsPilotTraining/androidGameEngine.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

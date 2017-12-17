@@ -34,6 +34,7 @@ public class WorldRenderer
     int lastTime = 0;
     int colorTracker = 0;
     boolean newRecord;
+    boolean recordsUpdated;
 
     public WorldRenderer(GameEngine gameEngine, World world)
     {
@@ -73,7 +74,6 @@ public class WorldRenderer
             gameEngine.drawBitmap(enemyCircle, world.CircleEnemy.x, world.CircleEnemy.y);
         }
 
-
         if (world.gameOver)
         {
             gameEngine.drawText(font,"GAMEOVER!!!", 63, 150, Color.RED, 40);
@@ -91,14 +91,14 @@ public class WorldRenderer
                 gameEngine.drawText(font,"Your time: " + (int)world.passedTime, 55, 200, Color.RED, 40);
             }
 
-            if (!world.recordsUpdated) // Check to see if we have updated the record this playthrough
+            if (!recordsUpdated) // Check to see if we have updated the record this playthrough
             {
-                if(world.updateRecords((int) world.passedTime))
+                if(gameEngine.updateRecords((int) world.passedTime))
                 {
+                    recordsUpdated = true;
                     newRecord = true;
                     recordSound.play(1);
                 }
-                world.loadRecords(gameEngine);
             }
             if (newRecord)
             {
@@ -119,7 +119,6 @@ public class WorldRenderer
 
     private void determineBackgroundToDraw(float passedTime)
     {
-
         if(passedTime - lastTime > 10)
         {
             lastTime = (int) passedTime;

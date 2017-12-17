@@ -2,11 +2,11 @@ package dk.andreas.soeren.gameengine;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.Typeface;
@@ -18,7 +18,6 @@ import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Bundle;
-import android.support.constraint.solver.widgets.Rectangle;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -59,7 +58,9 @@ public abstract class GameEngine extends Activity implements Runnable, SensorEve
     private State state = State.Paused;
     private List<State> stateChanges = new ArrayList<>();
 
-
+    // Highscores
+    SharedPreferences sharedPreferences;
+    String[] highscores = new String[3];
 
 
     @Override
@@ -193,7 +194,45 @@ public abstract class GameEngine extends Activity implements Runnable, SensorEve
         {
             throw new RuntimeException("Could not load sound from file: " + filename);
         }
-      }
+    }
+
+    public boolean updateRecords(int time)
+    {
+        loadHighscores(); // To make sure we have loaded the newest highscores
+        if (time >= Integer.parseInt(highscores[0]))
+        {
+            sharedPreferences.edit().putString("first","" + time).apply();
+            sharedPreferences.edit().putString("second", highscores[0]).apply();
+            sharedPreferences.edit().putString("third", highscores[1]).apply();
+            return true;
+        }
+        else if (time >= Integer.parseInt(highscores[1]))
+        {
+            sharedPreferences.edit().putString("second", "" + time).apply();
+            sharedPreferences.edit().putString("third", highscores[1]).apply();
+            return true;
+        }
+        else if (time >= Integer.parseInt(highscores[2]))
+        {
+            sharedPreferences.edit().putString("third","" + time).apply();
+            return true;
+        }
+        return false;
+    }
+
+    public String[] getHighscores()
+    {
+        loadHighscores();
+        return highscores;
+    }
+
+    public void loadHighscores()
+    {
+        sharedPreferences = this.getSharedPreferences("DATA", Context.MODE_PRIVATE);
+        highscores[0] = sharedPreferences.getString("first", "0");
+        highscores[1] = sharedPreferences.getString("second", "0");
+        highscores[2] = sharedPreferences.getString("third","0");
+    }
 
     public void clearFrameBuffer(int color)
     {
@@ -301,7 +340,6 @@ public abstract class GameEngine extends Activity implements Runnable, SensorEve
         paint.setColor(color);
         canvas.drawText(text, x, y, paint);
     }
-
 
 
     public void onPause()

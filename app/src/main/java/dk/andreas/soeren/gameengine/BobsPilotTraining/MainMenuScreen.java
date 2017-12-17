@@ -8,10 +8,6 @@ import dk.andreas.soeren.gameengine.GameEngine;
 import dk.andreas.soeren.gameengine.Screen;
 import dk.andreas.soeren.gameengine.TouchEvent;
 
-/**
- * Created by Andreas on 07-Nov-17.
- */
-
 public class MainMenuScreen extends Screen
 {
     Bitmap background = null;

@@ -1,13 +1,8 @@
 package dk.andreas.soeren.gameengine.BobsPilotTraining;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import dk.andreas.soeren.gameengine.Breakout.*;
 import dk.andreas.soeren.gameengine.GameEngine;
 
 
@@ -25,9 +20,6 @@ public class World
     Enemy SquareEnemy;
     Enemy TriangleEnemy;
     Enemy CircleEnemy;
-    String[] records = new String[3];
-    SharedPreferences sharedPreferences;
-    boolean recordsUpdated = false;
     int speedUpCheck = 0;
     float passedTime = 0;
 
@@ -38,7 +30,6 @@ public class World
         this.collisionListener = collisionListener;
         plane = new Plane();
         setUpEnemies();
-        loadRecords(gameEngine);
     }
 
 
@@ -125,8 +116,6 @@ public class World
     {
         SquareEnemy = new Enemy(40, 40, 319 - 40, 0);
         TriangleEnemy = new Enemy(29, 24, 0, 479 - 24);
-
-
         enemyList.add(SquareEnemy);
         enemyList.add(TriangleEnemy);
     }
@@ -170,7 +159,6 @@ public class World
         {
             plane.y = (int) MIN_Y;
         }
-
     }
 
     public void checkBoundariesEnemy(Enemy enemy)
@@ -213,41 +201,6 @@ public class World
             return true;
         }
         return false;
-    }
-
-    public void loadRecords(Context context)
-    {
-        sharedPreferences = context.getSharedPreferences("DATA", Context.MODE_PRIVATE);
-        records[0] = sharedPreferences.getString("first", "0");
-        records[1] = sharedPreferences.getString("second", "0");
-        records[2] = sharedPreferences.getString("third","0");
-
-    }
-
-    public boolean updateRecords(int time)
-    {
-        boolean updated = false;
-        if (time >= Integer.parseInt(records[0]))
-        {
-            sharedPreferences.edit().putString("first","" + time).apply();
-            sharedPreferences.edit().putString("second", records[0]).apply();
-            sharedPreferences.edit().putString("third", records[1]).apply();
-            updated = true;
-        }
-        else if (time >= Integer.parseInt(records[1]))
-        {
-            sharedPreferences.edit().putString("second", "" + time).apply();
-            sharedPreferences.edit().putString("third", records[1]).apply();
-            updated = true;
-        }
-        else if (time >= Integer.parseInt(records[2]))
-        {
-            sharedPreferences.edit().putString("third","" + time).apply();
-            updated = true;
-        }
-
-        recordsUpdated = true;
-        return updated;
     }
 }
 

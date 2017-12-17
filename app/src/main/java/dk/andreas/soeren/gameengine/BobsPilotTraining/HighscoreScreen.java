@@ -13,12 +13,11 @@ import dk.andreas.soeren.gameengine.Screen;
 
 public class HighscoreScreen extends Screen
 {
-    String assetsFolder = "bobspilottrainingassets/";
-    Bitmap background = null;
-    Bitmap returnToMainMenuButton = null;
-    Highscores highscores;
-    String[] highscoresArray;
-    Typeface font = null;
+    private String assetsFolder = "bobspilottrainingassets/";
+    private Bitmap background = null;
+    private Bitmap returnToMainMenuButton = null;
+    private String[] highscoresArray;
+    private Typeface font = null;
 
     public HighscoreScreen(GameEngine gameEngine)
     {
@@ -26,9 +25,7 @@ public class HighscoreScreen extends Screen
         background = gameEngine.loadBitMap(assetsFolder + "HighscoreScreen.png");
         returnToMainMenuButton = gameEngine.loadBitMap(assetsFolder + "returnToMainMenuButton.png");
         font = gameEngine.loadFont(assetsFolder + "Chewy-Regular.ttf");
-        highscores = new Highscores();
-        highscores.loadRecords(gameEngine);
-        highscoresArray = highscores.highscores;
+        highscoresArray = gameEngine.getHighscores();
     }
 
     @Override
