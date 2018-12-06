@@ -3,10 +3,10 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         config {
-            keyAlias 'key02'
-            keyPassword 'zaq123'
-            storeFile file('C:/Users/Andre/.android/realdeal.jks')
-            storePassword 'zaq123'
+            keyAlias 'key0'
+            keyPassword '123asd'
+            storeFile file('C:/Users/sbt/bobkey.jks')
+            storePassword 'asd123'
         }
     }
     compileSdkVersion 25
